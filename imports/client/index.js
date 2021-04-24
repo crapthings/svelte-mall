@@ -1,3 +1,3 @@
 import './global'
-import './router'
+import './app'
 import '../methods'

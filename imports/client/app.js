@@ -1,4 +1,4 @@
-import App from './app'
+import App from './app.html'
 
 const initApp = function () {
   const target = document.body
