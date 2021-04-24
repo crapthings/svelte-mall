@@ -1,0 +1,52 @@
+{#if isTop}
+  <div ondragover='return false' on:drop|preventDefault={moveCategory()}>
+    <span>根节点</span>
+    <button on:click={newCategory()}>+</button>
+  </div>
+{/if}
+
+{#if categories}
+{#each categories as category}
+  <div class='mgl-md'>
+    <div draggable={true} on:dragstart={startMoveCategory(category._id)} ondragover='return false' on:drop|preventDefault={moveCategory(category._id)}>
+      <button on:click={removeCategory(category._id)}>删除</button>
+      <span>{category.name}</span>
+      <button on:click={newCategory(category._id)}>+</button>
+    </div>
+    <svelte:self categories={Categories.find({ parentId: category._id }).fetch()} />
+  </div>
+{/each}
+{/if}
+
+<script>
+  export let isTop = false
+  export let categories = []
+
+  const newCategory = (parentId) => (evt) => {
+    const name = prompt()
+    if (!name?.trim()) return
+    const category = { name }
+    if (parentId) {
+      category['parentId'] = parentId
+    }
+    Meteor.call('newCategory', category)
+  }
+
+  const removeCategory = (_id) => (evt) => {
+    Meteor.call('removeCategory', _id)
+  }
+
+  const startMoveCategory = (_id) => (evt) => {
+    event.dataTransfer.effectAllowed = 'move'
+    event.dataTransfer.dropEffect = 'move'
+    const sourceId = _id
+    event.dataTransfer.setData('text/plain', sourceId)
+  }
+
+  const moveCategory = (parentId) => (evt) => {
+    evt.stopPropagation()
+    event.dataTransfer.dropEffect = 'move'
+    const _id = event.dataTransfer.getData('text/plain')
+    Meteor.call('moveCategory', _id, parentId)
+  }
+</script>

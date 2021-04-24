@@ -1,0 +1,38 @@
+<ul>
+  <li>
+    <a href='/admin'>{currentDisplayName}</a>
+  </li>
+
+  <li>
+    <a href='/admin/orders'>订单管理</a>
+  </li>
+
+  <li>
+    <a href='/admin/products'>商品管理</a>
+  </li>
+
+  <li>
+    <a href='/admin/categories'>分类管理</a>
+  </li>
+
+  <li>
+    <a href='#' on:click|preventDefault={logout}>注销</a>
+  </li>
+</ul>
+
+<script>
+  import { navigate } from 'svelte-routing'
+
+  let currentUser = Meteor.user()
+  let currentDisplayName = Meteor.user()?.displayName || Meteor.user()?.username
+
+  const logout = () => {
+    Meteor.logout()
+    navigate('/admin')
+  }
+
+  Tracker.autorun(() => {
+    currentUser = Meteor.user()
+    currentDisplayName = Meteor.user()?.displayName || Meteor.user()?.username
+  })
+</script>

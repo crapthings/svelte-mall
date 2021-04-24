@@ -1,0 +1,29 @@
+<div id='app' use:links>
+  <Router>
+    <Route path='/admin'>
+      <AdminPage />
+    </Route>
+
+    <Route path='/admin/orders'>
+      <AdminOrdersPage />
+    </Route>
+
+    <Route path='/admin/products'>
+      <AdminProductsPage />
+    </Route>
+
+    <Route path='/admin/categories'>
+      <AdminCategoriesPage />
+    </Route>
+
+
+  </Router>
+</div>
+
+<script>
+  import { Router, Route, Link, links } from 'svelte-routing'
+  import AdminPage from './admin'
+  import AdminOrdersPage from './admin/orders'
+  import AdminProductsPage from './admin/products'
+  import AdminCategoriesPage from './admin/categories'
+</script>

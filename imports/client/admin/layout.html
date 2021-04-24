@@ -1,0 +1,28 @@
+{#if currentUserId}
+  {#if loggingIn}
+    <!-- <div>登录中</div> -->
+  {:else}
+    <div>
+      <Nav />
+      <slot></slot>
+    </div>
+  {/if}
+{:else}
+  <Login />
+{/if}
+
+<script>
+  import Login from './login'
+  import Nav from './nav'
+
+  let currentUserId = Meteor.userId()
+  let loggingIn = true
+
+  Tracker.autorun(() => {
+    currentUserId = Meteor.userId()
+  })
+
+  Tracker.autorun(() => {
+    loggingIn = Meteor.loggingIn()
+  })
+</script>

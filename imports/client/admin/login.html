@@ -1,0 +1,27 @@
+<form on:submit|preventDefault={submit}>
+  <div>
+    <label>
+      <input required type='text' autocomplete='new-password' bind:value={username} />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      <input required type='password' autocomplete='new-password' bind:value={password} />
+    </label>
+  </div>
+
+  <div>
+    <label>
+      <input type='submit' />
+    </label>
+  </div>
+</form>
+
+<script>
+  let username, password
+
+  const submit = function () {
+    Meteor.loginWithPassword(username, password)
+  }
+</script>

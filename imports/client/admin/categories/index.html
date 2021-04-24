@@ -1,0 +1,33 @@
+<Layout>
+  <div>admin categories</div>
+  {#if loading}
+    <div>loading</div>
+  {:else}
+    <List isTop={true} categories={$categories} />
+  {/if}
+</Layout>
+
+<script>
+  import Layout from '../layout'
+  import List from './list'
+
+  const selector = { parentId: { $exists: false } }
+
+  $: loading = Meteor.subscribe('categories').ready()
+  $: categories = useTracker(() => (
+    Categories
+      .find({}, { sort: { name: 1 } })
+      .map(mapSubcategories)
+      .filter(filterTopCategories)
+  ))
+
+  function mapSubcategories (category) {
+    const { parentId } = category
+    category.subcategories = parentId ? Categories.find({ parentId }).fetch() : []
+    return category
+  }
+
+  function filterTopCategories (category) {
+    return !category.parentId
+  }
+</script>

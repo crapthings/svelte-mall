@@ -1,0 +1,26 @@
+{
+  "name": "svelte-mall",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.11.2",
+    "lodash": "^4.17.21",
+    "meteor-node-stubs": "^1.0.1",
+    "svelte": "^3.31.2",
+    "svelte-routing": "^1.6.0"
+  },
+  "meteor": {
+    "mainModule": {
+      "client": "client/main",
+      "server": "server/main"
+    }
+  },
+  "svelte:compiler": {
+    "extensions": [
+      "svelte",
+      "html"
+    ]
+  }
+}
