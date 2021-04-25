@@ -1,7 +1,20 @@
 <Layout>
   <div>admin products</div>
+  {#if loading}
+    <div>loading</div>
+  {:else}
+    <List products={$products} />
+  {/if}
 </Layout>
 
 <script>
   import Layout from '../layout'
+  import List from './list'
+
+  $: loading = Meteor.subscribe('products').ready()
+  $: products = useTracker(() => (
+    Products
+      .find({}, { sort: { name: 1 } })
+      .fetch()
+  ))
 </script>

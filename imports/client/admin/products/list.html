@@ -1,0 +1,34 @@
+{#if products.length}
+  <table>
+    <thead>
+      <tr class='sticky'>
+        <th class='pd-sm'>编号</th>
+        <th class='pd-sm'>图片</th>
+        <th class='pd-sm'>名称</th>
+        <th class='pd-sm'>分类</th>
+        <th class='pd-sm'>售价</th>
+        <th class='pd-sm'>销量</th>
+        <th class='pd-sm'>库存</th>
+        <th class='pd-sm'>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      {#each products as product}
+        <tr>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'>{product.name}</td>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'></td>
+          <td class='pd-sm'></td>
+        </tr>
+      {/each}
+    </tbody>
+  </table>
+{/if}
+
+<script>
+  export let products = []
+</script>
